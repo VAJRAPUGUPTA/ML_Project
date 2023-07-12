@@ -1,0 +1,15 @@
+{
+  "name": "project",
+  "version": "1.0.0",
+  "description": "this is major project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "shankar",
+  "license": "ISC",
+  "dependencies": {
+    "flowbite": "^1.6.3",
+    "tailwindcss": "^3.2.4"
+  }
+}

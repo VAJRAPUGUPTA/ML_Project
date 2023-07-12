@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>HLDP</title>
+	<link rel="stylesheet" href="{{url_for('static',filename='dist/css/output.css')}}">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.js"></script>
+	<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+	<style>
+	#loading {
+		border: 16px solid #f3f3f3; /* Light grey */
+		border-top: 16px solid #3498db; /* Blue */
+		border-radius: 50%;
+		width: 120px;
+		height: 120px;
+		animation: spin 2s linear infinite;
+		display: none;
+		margin-bottom: 20px;
+		}
+
+		#loader{
+			display: none;
+			width: 100%;
+		}
+		#load{
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			width: 100%;
+		}
+
+		@keyframes spin {
+		0% { transform: rotate(0deg); }
+		100% { transform: rotate(360deg); }
+	    }
+	#main {
+		background-color: transparent;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+	#head{
+		color:#fff;
+		margin-bottom:30px;
+	}
+    #content{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+	#player{
+		margin-top:20px;
+	}
+	.bt{
+		margin-bottom: 20px;
+	}
+	.bts{
+		appearance: button;
+		backface-visibility: hidden;
+		background-color: #405cf5;
+		border-radius: 6px;
+		border-width: 0;
+		box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset,rgba(50, 50, 93, .1) 0 2px 5px 0,rgba(0, 0, 0, .07) 0 1px 1px 0;
+		box-sizing: border-box;
+		color: #fff;
+		cursor: pointer;
+		font-family: -apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Ubuntu,sans-serif;
+		font-size: 100%;
+		height: 44px;
+		line-height: 1.15;
+		margin: 12px 0 0;
+		outline: none;
+		overflow: hidden;
+		padding: 0 25px;
+		position: relative;
+		text-align: center;
+		text-transform: none;
+		transform: translateZ(0);
+		transition: all .2s,box-shadow .08s ease-in;
+		user-select: none;
+		-webkit-user-select: none;
+		touch-action: manipulation;
+		width: 100%;
+			}
+	.bts:disabled {
+	cursor: default;
+	}
+
+	.bts:focus {
+	box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset, rgba(50, 50, 93, .2) 0 6px 15px 0, rgba(0, 0, 0, .1) 0 2px 2px 0, rgba(50, 151, 211, .3) 0 0 0 4px;
+	}
+
+    #im{
+        margin-right:40px;
+        margin-bottom:10px;
+    }
+
+	#prev {
+			display: flex;
+			flex-direction: row;
+			justify-content: space-between;
+			height: 50%;
+			width: 40%;
+		}
+
+	</style>
+	<script type="text/javascript">
+        function loading(){
+            document.getElementById('loading').style.display  = "block";
+            document.getElementById('loader').style.display  = "block";
+			document.getElementById('content').style.display = "none" ; 
+			document.getElementById('image').className = "block";
+        }
+    </script>
+</head>
+<body class="bg-gray-800">
+	<nav class="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-900">
+		<div class="container flex flex-wrap items-center justify-between mx-auto">
+		<a href="/" class="flex items-center">
+			<img src="{{url_for('static',filename='dist/css/sample.jpg')}}" class="h-6 mr-3 sm:h-9" alt="HNPD Logo" />
+			<span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">HNPD</span>
+		</a>
+		<div class="flex md:order-2">
+			<!-- <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Get started</button> -->
+			<button data-collapse-toggle="navbar-cta" type="button" class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-cta" aria-expanded="false">
+			<span class="sr-only">Open main menu</span>
+			<svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
+		</button>
+		</div>
+		<div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-cta">
+		<ul class="flex flex-col p-4 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+			<li>
+			<a href="/" class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white" aria-current="page">Home</a>
+			</li>
+			<li>
+			<a href="/" class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">About</a>
+			</li>
+			<li>
+			<a href="/" class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Video Upload</a>
+			</li>
+			<li>
+			<a href="/stream" class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Video Live</a>
+			</li>
+            <li>
+				<a href="/image_upload" class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Image Upload</a>
+			</li>
+		</ul>
+		</div>
+		</div>
+	</nav>
+  
+	<div id="main" class="flex h-screen items-center justify-center bg-gray-400">
+		<h2 class="text-4xl font-bold dark:text-white" id="head">Helmet and License Plate Detection using image upload</h2>
+		<div id="loader">
+			<div id="load">
+				<!-- <div id="loading"></div> -->
+				<h1 id="head">Number Plates Are Identifying Please Wait</h1>
+				<div id="prev">
+					<img src="{{url_for('static',filename='files/helmet.jpg')}}" alt="image_preview" id="image"
+						class="hidden">
+					<div id="loading"></div>
+				</div>
+			</div>
+		</div>
+		<div id="content">
+            <!-- {% if image_name %}
+                <img src="{{image_name}}" alt="Result Image" height="300px" width="300px" id="im">
+            {% endif %} -->
+			<form method='POST' enctype="multipart/form-data" onsubmit="loading()">
+				{{form.hidden_tag()}}
+				{{form.file(class_="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 bt",onchange="readurl(this)")}}
+				{{form.submit(class_="bts")}}
+			</form>
+		</div>
+		<div id="player">
+			<lottie-player src="https://assets7.lottiefiles.com/packages/lf20_c6jminso.json"  background="transparent"  speed="1"  style="width: 300px; height: 300px;"  loop  autoplay></lottie-player>
+		</div>
+	</div>
+</body>
+<script>
+	function readurl(input) {
+		if (input.files && input.files[0]) {
+			var reader = new FileReader();
+			reader.onload = function (e) {
+				document.getElementById('image').src = e.target.result;
+				document.getElementById('image').style.height = "200px";
+				document.getElementById('image').style.width = "400px";
+			};
+
+			reader.readAsDataURL(input.files[0]);
+		}
+	}
+</script>
+</html>
